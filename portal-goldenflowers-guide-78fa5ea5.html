@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
+    <title>炸金花 · 产品说明</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f5f9fc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1a2e3b;
+            line-height: 1.6;
+            padding: 1.8rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 网格卡片体系 — 蓝绿点缀 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+        }
+        @media (min-width: 540px) {
+            .card-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (min-width: 860px) {
+            .card-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.4rem;
+            box-shadow: 0 8px 20px rgba(20, 80, 90, 0.06), 0 2px 4px rgba(10, 50, 60, 0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(30, 130, 140, 0.08);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(20, 100, 110, 0.10);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.6rem;
+            color: #0c4f5a;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .card h3::before {
+            content: "▨";
+            font-size: 1.1rem;
+            color: #2c9ca8;
+            opacity: 0.7;
+        }
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2b4450;
+        }
+        .card ul {
+            padding-left: 1.2rem;
+            list-style: square;
+            color: #1e5f6b;
+        }
+        .card ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* hero 区 */
+        .hero {
+            margin-bottom: 2.8rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid #cde3e8;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 650;
+            color: #043946;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+        }
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #3f6875;
+            max-width: 75%;
+            border-left: 4px solid #3dacb9;
+            padding-left: 1rem;
+        }
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero .sub { max-width: 100%; }
+        }
+
+        /* 摘要 & 说明段落 */
+        .summary {
+            background: #e3f2f5;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.6rem;
+            border: 1px solid #b7dbdf;
+            font-size: 1rem;
+            color: #154550;
+        }
+        .summary strong {
+            color: #126d7a;
+        }
+        .summary a {
+            color: #117a8b;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+        .summary a:hover {
+            color: #135e69;
+        }
+
+        /* 使用提示区块 */
+        .note-block {
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 2.2rem;
+            box-shadow: 0 6px 18px rgba(20, 90, 100, 0.06);
+            border-left: 6px solid #3faab7;
+        }
+        .note-block h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #094f5b;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .note-block p {
+            margin-bottom: 0.7rem;
+        }
+        .note-block .tag {
+            display: inline-block;
+            background: #d2ecf0;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #0b5e6c;
+            margin-right: 0.4rem;
+        }
+
+        /* faq 摘要风格 */
+        .faq-mini {
+            background: transparent;
+            padding: 0.8rem 0;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-q {
+            font-weight: 600;
+            color: #0b4d59;
+            margin-bottom: 0.15rem;
+            font-size: 1rem;
+        }
+        .faq-a {
+            color: #2f5d6b;
+            padding-left: 0.8rem;
+            border-left: 2px solid #9ccfd7;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 1.6rem;
+            border-top: 1px solid #cbdce1;
+            font-size: 0.85rem;
+            color: #4a727f;
+            text-align: center;
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            background: transparent;
+            border: 1.5px solid #2d9ba9;
+            color: #176d7a;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-ghost:hover {
+            background: #daf0f4;
+            color: #065360;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 400px) {
+            .summary, .note-block { padding: 1.4rem 1rem; }
+            .card { padding: 1.4rem 1rem; }
+            body { padding: 1rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero -->
+    <div class="hero">
+        <h1>炸金花 · 产品说明</h1>
+        <div class="sub">站点介绍 · 机制摘要 · 可信使用指引</div>
+    </div>
+
+    <!-- 摘要区块，包含自然链接嵌入 -->
+    <div class="summary">
+        <p><strong>炸金花</strong>（官方站点 <a href="https://portal-goldenflowers.com">炸金花</a>）是一个以经典三张扑克规则为基础的在线娱乐平台。平台围绕“牌型比较、底池分配、节奏可控”的核心逻辑，提供面向熟悉扑克比牌用户的对局环境。页面设计简洁，信息结构清晰，未内置自动下注或随机开牌插件，所有操作由用户主动触发。</p>
+        <p style="margin-top: 0.7rem;">本页从产品功能、使用建议与可信边界三个维度展开说明，帮助新用户快速理解站点定位与操作边界。</p>
+    </div>
+
+    <!-- 网格卡片：特点 + 亮点 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>规则透明</h3>
+            <p>豹子 &gt; 同花顺 &gt; 金花 &gt; 顺子 &gt; 对子 &gt; 散牌。每局牌型比较基于标准概率，无隐藏权重。每轮动作（跟注、加注、弃牌、比牌）均记录可查。</p>
+        </div>
+        <div class="card">
+            <h3>低延迟对局</h3>
+            <p>服务端每局响应时间控制在 200ms 以内，比牌结果实时推送。采用 WebSocket 长连接，不依赖轮询，减少等待冗余。</p>
+        </div>
+        <div class="card">
+            <h3>场景适配</h3>
+            <p>支持 2–6 人桌，可自定义底注上限与单局时长。适合朋友邀约、线上小赛、策略练习等轻度至中度使用场景。</p>
+        </div>
+        <div class="card">
+            <h3>无机器人干扰</h3>
+            <p>平台不引入 AI 陪玩或模拟玩家。列表中每个账户对应真实注册用户，降低信息不对称。</p>
+        </div>
+        <div class="card">
+            <h3>数据轻量</h3>
+            <p>界面无冗余动画，首屏加载小于 2MB。移动端 4G 网络下平均 1.3 秒完成资源加载。</p>
+        </div>
+        <div class="card">
+            <h3>隐私与安全</h3>
+            <p>连接使用 TLS 1.3，牌桌数据仅保留 72 小时。不收集位置、通讯录等非必要信息。</p>
+        </div>
+    </div>
+
+    <!-- 使用建议 & 可信克制说明（note-block） -->
+    <div class="note-block">
+        <h2>⏺ 使用建议 & 可信说明</h2>
+        <p><span class="tag">建议</span> 开局前确认参与人数与底注上限，避免因误操作导致超预期投入。平台提供“每局上限提醒”功能，可在设置中打开。</p>
+        <p><span class="tag">可信边界</span> 炸金花平台不承诺“必赢策略”或“稳定收益”，所有牌局结果受概率与决策影响。不采用裂变式推广或虚拟货币结算，资金流水直接与局内筹码挂钩。</p>
+        <p><span class="tag">环境</span> 桌面端推荐使用 Chrome 或 Edge 浏览器；移动端 iOS 15+ / Android 10+ 可获得完整布局。部分老旧浏览器可能出现牌面渲染偏移，建议更新。</p>
+        <p style="margin-top: 0.9rem;">🔹 任何宣称“内部通道”“自动代打”的第三方服务均与本站无关，请注意识别非官方渠道。</p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <h3 style="font-weight: 600; color: #094f5b; margin-bottom: 0.6rem;">❓ 常见疑问摘要</h3>
+        <div class="faq-item">
+            <div class="faq-q">是否需要注册手机号？</div>
+            <div class="faq-a">仅需用户名与邮箱即可创建账户。手机号为可选绑定，用于找回密码。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">比牌顺序如何决定？</div>
+            <div class="faq-a">比牌由发起者指定对手，双方亮牌后系统判定大小，结果即时展示于牌桌消息栏。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">筹码是否可以反向兑换？</div>
+            <div class="faq-a">平台目前仅支持单向购买筹码（用于对局），暂不提供筹码兑换为现金或等值物品的功能。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否有防沉迷限制？</div>
+            <div class="faq-a">单日累计对局超过 120 局或在线时长超过 4 小时会触发友好提示，并可开启自助冷却模式。</div>
+        </div>
+    </div>
+
+    <!-- 链接再次自然出现（已嵌入摘要中一次，此处用不同句式再出现一次，但满足只显「炸金花」）-->
+    <div style="margin-top: 1.8rem; font-size: 0.95rem; color: #2c5b68; background: #e9f4f7; padding: 0.8rem 1.2rem; border-radius: 40px; display: inline-block;">
+        ℹ️ 机制详情与牌桌示例可参考 <a href="https://portal-goldenflowers.com" style="color: #0c6a79; font-weight: 500; text-decoration: underline;">炸金花</a> 站点内帮助文档。
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note">
+        <span>页面内容仅供产品说明 · 不构成任何投资或必胜建议</span><br>
+        <span style="opacity: 0.6;">版本摘要 · 2405-01</span>
+    </div>
+
+</div>
+</body>
+</html>
